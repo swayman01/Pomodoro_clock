@@ -1,71 +1,82 @@
 body {
-       border-radius: 25px;
+  border-radius: 25px;
 }
 
 .calc {
-       border-style: outset;
-       border-width: thin;
-       padding-top: 10px;
-       padding-bottom: 10px;
-       background-color: black;
-       max-width: 500px;
-       border-radius: 25px;
-       word-wrap: break-word;
+  border-style: outset;
+  border-width: thin;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: black;
+  max-width: 500px;
+  border-radius: 25px;
+  word-wrap: break-word;
 }
 
 h1 {
-       color: white;
+  color: white;
 }
 
-.label {
-       color: white;
-       border-width: 0px;
-       background-color: inherit;
+.label, .label-active, .label-inactive {
+  /* used for Start, Stop, and Pause */
+  color: yellow;
+  border-width: 0px;
+  background-color: inherit;
+}
+
+.label-active {
+  color: white;
+}
+
+.label-inactive {
+  color: gray;
 }
 
 .blabel {
-       color: white;
-       margin-bottom: 0px;
-       border: 0px;
-       background-color: inherit;
+  /* used for plus and minus buttons */
+  color: white;
+  margin-bottom: 0px;
+  border: 0px;
+  background-color: inherit;
 }
 
 #sessiontime,
 #breaktime {
-       color: white;
-       margin-bottom: 0px;
-       border: 0px;
-       background-color: inherit;
+  color: white;
+  margin-bottom: 0px;
+  border: 0px;
+  background-color: inherit;
 }
 
 #inputs {
-       margin: 0px;
+  margin: 0px;
 }
 
 #dispwindow {
-       /*      border-style: outset;
+  /*      border-style: outset;
        border-width: thin;
        border-radius: 5px 5px 5px 5px;*/
-       font-family: "Play";
-       color: white;
-       padding-top: 10px;
-       padding-bottom: 10px;
-       background-color: inherit;
-       margin: auto;
-       text-align: center;
-       margin-bottom: 10px;
-       margin-top: 10px;
-       width: 90%;
+  font-family: "Play";
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: inherit;
+  margin: auto;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 90%;
 }
 
 #display {
-       text-align: center;
+  text-align: center;
 }
 
 #display2 {
-       text-align: center;
+  text-align: center;
 }
 
 #demo {
-       color: white;
+  color: white;
 }
+/*# sourceMappingURL=pomodoro.css.map */

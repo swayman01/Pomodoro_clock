@@ -1,3 +1,17 @@
+/* TODO
+Brighten keys that are active and disable ones that aren't
+  stopped: Start Session and Start Break active
+  Session: Stop and Pause Active
+  Break: Stop and Pause Active
+  Pause Session: Resume Session and Stop Active
+  Pause Break: Resume Break and Stop Active
+*/
+
+/* Save last time on stop
+*/
+
+/* Put time on tab
+*/
 var calcwidth = 500;
 var state = "stopped"; //other options include paused, session, break
 var substate = "notcycling"; //used to resume on pause
@@ -255,32 +269,6 @@ $("#session").click(function() {
 });
 
 $("#break").click(function() {
-    /* replaced 7/11/17     
-        if ((state !== "paused") && (state !== "stopped")) return;
-        if (state === "paused") {
-            if (substate === "session") {
-                document.getElementById("session").innerHTML = "Start Session";
-                stopclock = true;
-                console.log("x: " + x + " state: " + state);
-                clearInterval(x);
-                distance = -1;
-                setTimeout(function() {
-                    state = "session";
-                    substate = "notcycling";
-                    stopclock = false;
-                    nextstate();
-                }, 12);
-            }
-            if (substate === "break") {
-                document.getElementById("break").innerHTML = "Start Break";
-                document.getElementById("display").innerHTML = "Recharging";
-                document.getElementById("display2").innerHTML = "<br>";
-                state = "break";
-                substate = "cycling";
-                stopclock = false;
-                countdown(pauseddistance);
-            }
-        }*/
     if (state === "break") return;
     if (state === "stopped") {
         state = "session"; //for flip in nextstate
