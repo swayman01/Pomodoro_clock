@@ -16,8 +16,8 @@ h1 {
 .label-row {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[5];
-      grid-template-columns: repeat(5, 1fr);
+  -ms-grid-columns: 20% 20% 20% 20% 20%;
+      grid-template-columns: 20% 20% 20% 20% 20%;
 }
 
 .input-row {
@@ -37,6 +37,10 @@ h1 {
   max-width: 500px;
   border-radius: 25px;
   word-wrap: break-word;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .label, .label-active, .label-inactive {
