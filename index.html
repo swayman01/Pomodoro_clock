@@ -2,134 +2,55 @@
     <!--  
         put time on tab
         look at logic for pause
-    look at substates for labels-->
+-->
     <html>
-
     <head>
         <title>Pomodoro</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1  user-scalable=no">
-        <!-- TODO Download so we don't need links to bootstrap and jquery 
-             Replace bootstrap with css grid -->
+        <!-- TODO Download so we don't need links to jquery  -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <link rel=" stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <!--<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
         <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet'>
+        <link href='./stylesheets/pomodoro.css' rel='stylesheet'>
        
-        <style>
-
-body {
-    border-radius: 25px;
-  }
-  
-  .calc {
-    border-style: outset;
-    border-width: thin;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: black;
-    max-width: 500px;
-    border-radius: 25px;
-    word-wrap: break-word;
-  }
-  
-  h1 {
-    color: white;
-  }
-  
-  .label, .label-active, .label-inactive {
-    /* used for Start, Stop, and Pause */
-    border-width: 0px;
-    background-color: inherit;
-  }
-  
-  .label-active {
-    color: white;
-  }
-  
-  .label-inactive {
-    color: gray;
-  }
-  
-  .blabel {
-    /* used for plus and minus buttons */
-    color: white;
-    margin-bottom: 0px;
-    border: 0px;
-    background-color: inherit;
-  }
-  
-  #sessiontime,
-  #breaktime {
-    color: white;
-    margin-bottom: 0px;
-    border: 0px;
-    background-color: inherit;
-  }
-  
-  #inputs {
-    margin: 0px;
-  }
-  
-  #dispwindow {
-    /*      border-style: outset;
-         border-width: thin;
-         border-radius: 5px 5px 5px 5px;*/
-    font-family: "Play";
-    color: white;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: inherit;
-    margin: auto;
-    text-align: center;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    width: 90%;
-  }
-  
-  #display {
-    text-align: center;
-  }
-        </style>
         <!-- Thanks to SoundBible.com for the bird calls -->
         <audio id="owl" src="./media/horned_owl-Mike_Koenig-1945374932.mp3" media-type="audio.mpeg"></audio>
         <audio id="rooster" src="./media/Rudy_rooster_crowing-Shelley-1948282641.mp3" media-type="audio.mpeg" preload="auto"></audio>
     </head>
 
     <body id="body">
-        <div class="container calc">
+        <div class="calc">
             <div class="text-center">
                 <h1 id="title">Pomodoro Clock</h1>
             </div>
             <div id="settings">
-                <div>
-                    <span class="col-xs-1"> </span>
-                    <span id="session" class="col-xs-4 text-center label label-active" type="button"> Start Session</span>
-                    <span class="col-xs-2"> </span>
-                    <span id="break" class="col-xs-4 text-center label label-active"> Start Break</span>
-                    <span class="col-xs-1"> </span>
+                <div class="label-row">
+                    <span> </span>
+                    <span id="session" class="text-center label label-active" type="button"> Start Session</span>
+                    <span> </span>
+                    <span id="break" class="text-center label label-active"> Start Break</span>
+                    <span> </span>
                 </div>
                 <br>
-                <p id="inputs">
-                    <span class="col-xs-1"> </span>
-                    <button class="qty col-xs-1 blabel" type="button" data-func="plus" data-field="field1">+</button>
-                    <input id="sessiontime" class="text-center col-xs-2" type="text" name="field1" value="60" />
-                    <button id="minus" class="qty col-xs-1 blabel" type="button" data-func="minus" data-field="field1">-</button>
-                    <span class="col-xs-2"> </span>
-                    <button class="qty col-xs-1 blabel" type="button" data-func="plus" data-field="break">+</button>
-                    <input id="breaktime" class="text-center col-xs-2" type="text" name="break" value="15" />
-                    <button class="qty col-xs-1 blabel" type="button" data-func="minus" data-field="break">-</button>
-                    <span class="col-xs-1"> </span>
-                </p>
+                <div id="inputs" class="input-row">
+                    <span> </span>
+                    <button class="qty blabel" type="button" data-func="plus" data-field="field1">+</button>
+                    <input id="sessiontime" class="text-center" type="text" name="field1" value="60" />
+                    <button id="minus" class="qty blabel" type="button" data-func="minus" data-field="field1">-</button>
+                    <span> </span>
+                    <button class="blabel" type="button" data-func="plus" data-field="break">+</button>
+                    <input id="breaktime" class="text-center" type="text" name="break" value="15" />
+                    <button class="qty blabel" type="button" data-func="minus" data-field="break">-</button>
+                    <span> </span>
+                </div>
                 <br>
-                <p><br>
-                    <span class="col-xs-1"> </span>
-                    <button id="stop" class="col-xs-4 label label-inactive text-center" type="button">Stop</button>
-                    <span class="col-xs-2"> </span>
-                    <button id="pause" class="col-xs-4 label label-inactive text-center" type="button">Pause</button>
-                    <span class="col-xs-1"> </span>
-                </p>
+                <div class="label-row">
+                    <span> </span>
+                    <button id="stop" class="label label-inactive text-center" type="button">Stop</button>
+                    <span> </span>
+                    <button id="pause" class="label label-inactive text-center" type="button">Pause</button>
+                    <span> </span>
+                </div>
             </div>
             <br>
             <div id="dispwindow" class="text-center">
@@ -143,7 +64,6 @@ body {
             <p id="footer">Written and coded by <a href="https://www.freecodecamp.com/swayman01" target=”_blank”>Steve Wayman.</a></p>
         </footer>
         <script>
-            // change classes: https://stackoverflow.com/questions/195951/how-can-i-change-an-elements-class-with-javascript
             var calcwidth = 500;
             var state = "stopped";
             var substate = "notcycling"; //used to resume on pause
@@ -159,8 +79,6 @@ body {
                          "session_paused": {"session": "active", "break": "inactive", "stopped": "active", "paused": "inactive", "id":"break"},
                            "break_paused": {"session": "inactive", "break": "active", "stopped": "active", "paused": "inactive", "id":"break"},
             };
-            // const active_label = new RegExp("label-active");
-            // const inactive_label = new RegExp("label-inactive");
             const active_label = "label-active";
             const inactive_label = "label-inactive";
 
