@@ -60,11 +60,18 @@ function set_labels(state) {
     console.log(state, "----\n")
     for (const [key, value] of Object.entries(statesDICT[state])) {
         if (key != "id") {
-            //console.log(key, value, document.getElementById(statesDICT[key]["id"]));
             if (value === "active") document.getElementById(statesDICT[key]["id"]).className = document.getElementById(statesDICT[key]["id"]).className.replace(inactive_label, active_label);
             if (value === "inactive") document.getElementById(statesDICT[key]["id"]).className = document.getElementById(statesDICT[key]["id"]).className.replace(active_label, inactive_label);
+            $(".blabel").css("color", "gray");
+            $("#sessiontime").css("color", "gray");
+            $("#breaktime").css("color", "gray");
             // console.log("180", key, value, document.getElementById(statesDICT[key]["id"]));
         }
+    }
+    if(state === "stopped") {
+        $(".blabel").css("color", "white");
+        $("#sessiontime").css("color", "white");
+        $("#breaktime").css("color", "white");
     }
 }
 
