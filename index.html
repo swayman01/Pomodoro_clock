@@ -2,6 +2,7 @@
     <!--  
         put time on tab
        light up settings on stop
+       Fix bug when Session time is more than 60 minutes
 -->
     <html>
     <head>
@@ -155,9 +156,10 @@
                 if ((state === "break") && (distance > (30 * 1000))) {
                     $(".calc").css("background-color", "#90caf9");
                 }
+                /* Commented out 1/13/22
                 $(".blabel").css("color", "gray");
                 $("#sessiontime").css("color", "gray");
-                $("#breaktime").css("color", "gray");
+                $("#breaktime").css("color", "gray"); */
                 // Update the count down every 1 second
                 x = setInterval(function() {
                     now = new Date().getTime();

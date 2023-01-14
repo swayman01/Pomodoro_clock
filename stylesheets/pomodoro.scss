@@ -1,15 +1,14 @@
 $active_button_color: white; 
 $inactive_button_color: gray;
 
-/* TODO:
+/* TODO: 
    Convert to rems
 */
 
 body {
        border-radius: 25px;
        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-       color:white; 
-}
+       color:white;
 
 footer{
        border-radius: 25px;
@@ -47,6 +46,11 @@ h3 {
        text-align: center;
 }
 
+.input-row-active {
+       @extend .input-row;
+       color: $active_button_color;
+}
+
 .calc {
        border-style: outset;
        border-width: thin;
@@ -66,7 +70,7 @@ h3 {
 }
 
 .label { /* used for Start, Stop, and Pause */
-       color: yellow; // test to ensure no unintentional not used
+       color: yellow; /* test to ensure no unintentional not used */
        border-width: 0px;
        background-color: inherit;
        font-size: 85%;
@@ -84,20 +88,32 @@ h3 {
 }
 
 .blabel { /* used for plus and minus buttons */
-       color: white;
+       // color: white; // Commented out 1/13/23
        text-align: center;
        margin-bottom: 0px;
        border: 0px;
        background-color: inherit;
 }
 
+.blabel-active {  
+       @extend .blabel;
+       color: $active_button_color;
+}
+
+.blabel-inactive {
+       @extend .blabel; 
+       color: $inactive_button_color;
+}
+
+
+
 .text-center {
        text-align: center;
 }
 
 #sessiontime,
-#breaktime {
-       color: white;
+#breaktime { 
+       // color: white; commented out 1/13/23
        margin-bottom: 0px;
        border: 0px;
        background-color: inherit;
