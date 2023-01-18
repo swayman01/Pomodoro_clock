@@ -149,7 +149,7 @@ function countdown() {
         }
         if (distance <= (30 * 1000)) {
             if (state === "session") {
-                ;
+                
                 $(".calc").css("background-color", "#FE5B35");
             }
             if (state === "break") {
@@ -258,7 +258,6 @@ $("#stop").click(function () {
     document.getElementById("display2").innerHTML = "<br>";
     document.getElementById("demo").innerHTML = "<br>";
     $(".calc").css("background-color", "black");
-    // $(".label").css("color", inactive_button_color);
     document.getElementById("session").innerHTML = "Start Session";
     document.getElementById("break").innerHTML = "Start Break";
     //    distance = -1;
