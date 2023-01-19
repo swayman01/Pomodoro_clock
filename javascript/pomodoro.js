@@ -55,6 +55,8 @@ const statesDICT = {
 // const inactive_label = new RegExp("label-inactive");
 const active_label = "label-active";
 const inactive_label = "label-inactive";
+const active_color = "white";
+const inactive_color = "gray";
 
 function set_labels(state) {
     console.log(state, "----\n")
@@ -62,16 +64,16 @@ function set_labels(state) {
         if (key != "id") {
             if (value === "active") document.getElementById(statesDICT[key]["id"]).className = document.getElementById(statesDICT[key]["id"]).className.replace(inactive_label, active_label);
             if (value === "inactive") document.getElementById(statesDICT[key]["id"]).className = document.getElementById(statesDICT[key]["id"]).className.replace(active_label, inactive_label);
-            $(".blabel").css("color", "gray");
-            $("#sessiontime").css("color", "gray");
-            $("#breaktime").css("color", "gray");
+            $(".blabel").css("color", inactive_color);
+            $("#sessiontime").css("color", inactive_color);
+            $("#breaktime").css("color", inactive_color);
             // console.log("180", key, value, document.getElementById(statesDICT[key]["id"]));
         }
     }
     if(state === "stopped") {
-        $(".blabel").css("color", "white");
-        $("#sessiontime").css("color", "white");
-        $("#breaktime").css("color", "white");
+        $(".blabel").css("color", active_color);
+        $("#sessiontime").css("color", active_color);
+        $("#breaktime").css("color", active_color);
     }
 }
 
@@ -134,9 +136,9 @@ function countdown() {
     if ((state === "break") && (distance > (30 * 1000))) {
         $(".calc").css("background-color", "#90caf9");
     }
-    $(".blabel").css("color", "gray");
-    $("#sessiontime").css("color", "gray");
-    $("#breaktime").css("color", "gray");
+    $(".blabel").css("color", inactive_color);
+    $("#sessiontime").css("color", inactive_color);
+    $("#breaktime").css("color", inactive_color);
     // Update the count down every 1 second
     x = setInterval(function () {
         now = new Date().getTime();
@@ -144,7 +146,7 @@ function countdown() {
         if ((distance / (60 * 1000) / val <= .1) || (distance <= (60 * 1000))) {
             if (state === "session") {
                 $(".calc").css("background-color", "#ECB028");
-                $(".blabel").css("color", "gray");
+                $(".blabel").css("color", inactive_color);
             }
         }
         if (distance <= (30 * 1000)) {
@@ -188,7 +190,8 @@ function countdown() {
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Output the result in an element with id="demo"
+        // Output the result in an element with id="demo" and in the tab
+        document.getElementById("tab").innerHTML = minutes + ":" + seconds;
         if (state !== "paused")
             if (minutes > 1) {
                 if (seconds < 31)
@@ -249,6 +252,7 @@ $('.qty').click(function () {
 });
 $("#stop").click(function () {
     set_labels("stopped")
+    document.getElementById("tab").innerHTML = "Pomodoro";
     if (state === "stopped") return;
     stopclock = true;
     state = "stopped";
