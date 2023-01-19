@@ -189,20 +189,22 @@ function countdown() {
         // Time calculations for days, hours, minutes and seconds
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        var minutes_remaining = Math.trunc(distance/(1000*60))
+        // console.log(distance, minutes_remaining, Math.trunc(minutes_remaining), seconds)
 
         // Output the result in an element with id="demo" and in the tab
-        document.getElementById("tab").innerHTML = minutes + ":" + seconds;
+        document.getElementById("tab").innerHTML = minutes_remaining + ":" + seconds;
         if (state !== "paused")
-            if (minutes > 1) {
+            if (minutes_remaining > 1) {
                 if (seconds < 31)
-                    document.getElementById("demo").innerHTML = minutes + " minutes left";
-                if (seconds > 30) document.getElementById("demo").innerHTML = minutes + 1 + " minutes left";
+                    document.getElementById("demo").innerHTML = minutes_remaining + " minutes left";
+                if (seconds > 30) document.getElementById("demo").innerHTML = minutes_remaining + 1 + " minutes left";
             }
-        if (minutes === 1) {
-            if (seconds > 30) document.getElementById("demo").innerHTML = minutes + 1 + " minutes left";
-            if (seconds < 31) document.getElementById("demo").innerHTML = minutes + " minute left ";
+        if (minutes_remaining === 1) {
+            if (seconds > 30) document.getElementById("demo").innerHTML = minutes_remaining + 1 + " minutes left";
+            if (seconds < 31) document.getElementById("demo").innerHTML = minutes_remaining + " minute left ";
         }
-        if (minutes < 1) {
+        if (minutes_remaining < 1) {
             document.getElementById("demo").innerHTML = seconds + " seconds left";
         }
 
