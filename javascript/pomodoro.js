@@ -1,4 +1,5 @@
 // change classes: https://stackoverflow.com/questions/195951/how-can-i-change-an-elements-class-with-javascript
+// Key command is document.getElementById('stop').innerText="End Session" 
 var calcwidth = 500;
 var state = "stopped";
 var substate = "notcycling"; //used to resume on pause
@@ -193,7 +194,9 @@ function countdown() {
         // console.log(distance, minutes_remaining, Math.trunc(minutes_remaining), seconds)
 
         // Output the result in an element with id="demo" and in the tab
-        document.getElementById("tab").innerHTML = minutes_remaining + ":" + seconds;
+        seconds_formatted = ("0" + seconds)
+        // console.log(seconds, seconds_formatted.slice(-2));
+        document.getElementById("tab").innerHTML = minutes_remaining + ":" + seconds_formatted.slice(-2);
         if (state !== "paused")
             if (minutes_remaining > 1) {
                 if (seconds < 31)
@@ -266,14 +269,17 @@ $("#stop").click(function () {
     $(".calc").css("background-color", "black");
     document.getElementById("session").innerHTML = "Start Session";
     document.getElementById("break").innerHTML = "Start Break";
-    //    distance = -1;
-    console.log("x: " + x + " state: " + state);
+    document.getElementById("stop").innerText = " ";
+    document.getElementById("pause ").innerText = " ";
     clearInterval(x);
 });
+
 $("#session").click(function () {
     if ((state === "paused") && (substate === "break")) return;
     if (state === "session") return;
     set_labels("session")
+    document.getElementById('stop').innerText="End Session";
+    document.getElementById('pause').innerText="Pause"
     if (state === "stopped") {
         // https://www.w3docs.com/snippets/javascript/how-to-change-an-elements-class-with-javascript.html
         state = "break"; //for flip in nextstate
@@ -288,6 +294,8 @@ $("#session").click(function () {
         clearInterval(x);
         substate === "notcycling";
         stopclock = true;
+        document.getElementById('stop').innerText="End Session";
+        document.getElementById('pause').innerText="Pause";
         //        setTimeout(function() {
         nextstate();
         //        }, 12);
@@ -322,6 +330,7 @@ $("#break").click(function () {
     if ((state === "paused") && (substate === "session")) return;
     if (state === "break") return;
     set_labels("break");
+    document.getElementById('stop').innerText="End Session"
     if (state === "stopped") {
         state = "session"; //for flip in nextstate
         substate === "notcycling";
@@ -362,9 +371,13 @@ $("#break").click(function () {
         }
     }
 }); // end #.break.click
+
 $("#pause").click(function () {
+    console.log("376 pause")
     if ((state === "stopped") || (state === "paused")) return;
     if ((state === "session") || (state === "break")) {
+        document.getElementById('stop').innerText="End Session";
+        document.getElementById("pause").innerText=" ";
         pauseddistance = distance / (1000 * 60);
         substate = state;
         state = "paused";
@@ -387,4 +400,5 @@ $("#pause").click(function () {
         return;
     }
 });
+
 /* global $*/
