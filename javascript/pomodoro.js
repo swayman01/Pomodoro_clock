@@ -1,4 +1,3 @@
-// change classes: https://stackoverflow.com/questions/195951/how-can-i-change-an-elements-class-with-javascript
 var calcwidth = 500;
 var state = "stopped";
 var substate = "notcycling"; //used to resume on pause
@@ -59,7 +58,7 @@ const active_color = "white";
 const inactive_color = "gray";
 
 function set_labels(state) {
-    console.log(state, "----\n")
+    // console.log(state, "----\n")
     for (const [key, value] of Object.entries(statesDICT[state])) {
         if (key != "id") {
             if (value === "active") document.getElementById(statesDICT[key]["id"]).className = document.getElementById(statesDICT[key]["id"]).className.replace(inactive_label, active_label);
@@ -67,9 +66,9 @@ function set_labels(state) {
             $(".blabel").css("color", inactive_color);
             $("#sessiontime").css("color", inactive_color);
             $("#breaktime").css("color", inactive_color);
-            // console.log("180", key, value, document.getElementById(statesDICT[key]["id"]));
         }
     }
+
     if(state === "stopped") {
         $(".blabel").css("color", active_color);
         $("#sessiontime").css("color", active_color);
@@ -190,10 +189,10 @@ function countdown() {
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
         var minutes_remaining = Math.trunc(distance/(1000*60))
-        // console.log(distance, minutes_remaining, Math.trunc(minutes_remaining), seconds)
 
         // Output the result in an element with id="demo" and in the tab
-        document.getElementById("tab").innerHTML = minutes_remaining + ":" + seconds;
+        seconds_formatted = ("0" + seconds)
+        document.getElementById("tab").innerHTML = minutes_remaining + ":" + seconds_formatted.slice(-2);
         if (state !== "paused")
             if (minutes_remaining > 1) {
                 if (seconds < 31)
@@ -266,14 +265,16 @@ $("#stop").click(function () {
     $(".calc").css("background-color", "black");
     document.getElementById("session").innerHTML = "Start Session";
     document.getElementById("break").innerHTML = "Start Break";
-    //    distance = -1;
-    console.log("x: " + x + " state: " + state);
+
     clearInterval(x);
 });
+
 $("#session").click(function () {
     if ((state === "paused") && (substate === "break")) return;
     if (state === "session") return;
     set_labels("session")
+    document.getElementById('stop').innerText="End Session";
+    document.getElementById('pause').innerText="Pause"
     if (state === "stopped") {
         // https://www.w3docs.com/snippets/javascript/how-to-change-an-elements-class-with-javascript.html
         state = "break"; //for flip in nextstate
@@ -288,9 +289,9 @@ $("#session").click(function () {
         clearInterval(x);
         substate === "notcycling";
         stopclock = true;
-        //        setTimeout(function() {
+        document.getElementById('stop').innerText="End Session";
+        document.getElementById('pause').innerText="Pause";
         nextstate();
-        //        }, 12);
         return;
     }
     if (state === "paused") {
@@ -318,10 +319,10 @@ $("#session").click(function () {
 });
 
 $("#break").click(function () {
-    console.log(state, " after #break key")
     if ((state === "paused") && (substate === "session")) return;
     if (state === "break") return;
     set_labels("break");
+    document.getElementById('stop').innerText="End Session"
     if (state === "stopped") {
         state = "session"; //for flip in nextstate
         substate === "notcycling";
@@ -362,9 +363,13 @@ $("#break").click(function () {
         }
     }
 }); // end #.break.click
+
 $("#pause").click(function () {
+    console.log("376 pause")
     if ((state === "stopped") || (state === "paused")) return;
     if ((state === "session") || (state === "break")) {
+        document.getElementById('stop').innerText="End Session";
+        document.getElementById("pause").innerText=" ";
         pauseddistance = distance / (1000 * 60);
         substate = state;
         state = "paused";
@@ -387,4 +392,5 @@ $("#pause").click(function () {
         return;
     }
 });
+
 /* global $*/
