@@ -270,7 +270,7 @@ $("#stop").click(function () {
     document.getElementById("session").innerHTML = "Start Session";
     document.getElementById("break").innerHTML = "Start Break";
     document.getElementById("stop").innerText = " ";
-    document.getElementById("pause ").innerText = " ";
+    document.getElementById("pause").innerText = " ";
     clearInterval(x);
 });
 
