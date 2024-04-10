@@ -23,7 +23,7 @@ const inactive_color = "gray";
 function set_labels(state) {
     // console.log(lstate,"----\n")
     for (const [key, value] of Object.entries(statesDICT[state])) {
-        ifi (key != "id") {
+        if (key != "id") {
             if (value === "active") document.getElementById(statesDICT[key]["id"]).className = document.getElementById(statesDICT[key]["id"]).className.replace(inactive_label, active_label); 
             if (value === "inactive") document.getElementById(statesDICT[key]["id"]).className = document.getElementById(statesDICT[key]["id"]).className.replace(active_label, inactive_label);
             $(".blabel").css("color", inactive_color);
@@ -100,7 +100,7 @@ function countdown() {
     }
     $(".blabel").css("color", inactive_color);
     $("#sessiontime").css("color", inactive_color);
-    $("#breaktime").css("color", inactive_color");
+    $("#breaktime").css("color", inactive_color);
     // Update the count down every 1 second
     x = setInterval(function() {
         now = new Date().getTime();
