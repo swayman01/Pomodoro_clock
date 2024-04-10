@@ -17,16 +17,25 @@ const statesDICT = {"stopped": {"session": "active", "break": "active", "stopped
 // const inactive_label = new RegExp("label-inactive");
 const active_label = "label-active";
 const inactive_label = "label-inactive";
+const active_color = "white";
+const inactive_color = "gray";
 
 function set_labels(state) {
-    console.log(state,"----\n")
+    // console.log(lstate,"----\n")
     for (const [key, value] of Object.entries(statesDICT[state])) {
-        if(key!="id") {
-            //console.log(key, value, document.getElementById(statesDICT[key]["id"]));
-            if(value==="active") document.getElementById(statesDICT[key]["id"]).className = document.getElementById(statesDICT[key]["id"]).className.replace(inactive_label, active_label); 
-            if(value==="inactive") document.getElementById(statesDICT[key]["id"]).className = document.getElementById(statesDICT[key]["id"]).className.replace(active_label, inactive_label);
-            // console.log("180", key, value, document.getElementById(statesDICT[key]["id"]));
+        ifi (key != "id") {
+            if (value === "active") document.getElementById(statesDICT[key]["id"]).className = document.getElementById(statesDICT[key]["id"]).className.replace(inactive_label, active_label); 
+            if (value === "inactive") document.getElementById(statesDICT[key]["id"]).className = document.getElementById(statesDICT[key]["id"]).className.replace(active_label, inactive_label);
+            $(".blabel").css("color", inactive_color);
+            $("#sessiontime").css("color", inactive_color);
+            $("#breaktime").css("color", inactive_color);
         }
+    }
+
+    if(state === "stopped") {
+        $(".blabel").css("color", active_color);
+        $("#sessiontime").css("color", active_color);
+        $("#breaktime").css("color", active_color);
     }
 }
 
@@ -89,9 +98,9 @@ function countdown() {
     if ((state === "break") && (distance > (30 * 1000))) {
         $(".calc").css("background-color", "#90caf9");
     }
-    $(".blabel").css("color", "gray");
-    $("#sessiontime").css("color", "gray");
-    $("#breaktime").css("color", "gray");
+    $(".blabel").css("color", inactive_color);
+    $("#sessiontime").css("color", inactive_color);
+    $("#breaktime").css("color", inactive_color");
     // Update the count down every 1 second
     x = setInterval(function() {
         now = new Date().getTime();
@@ -141,19 +150,20 @@ function countdown() {
         // Time calculations for days, hours, minutes and seconds
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        var minutes_remaining = Math.trunc(distance/(1000*60))
 
         // Output the result in an element with id="demo"
         if (state !== "paused")
-            if (minutes > 1) {
+            if (minutes_remaining > 1) {
                 if (seconds < 31)
                     document.getElementById("demo").innerHTML = minutes + " minutes left";
                 if (seconds > 30) document.getElementById("demo").innerHTML = minutes + 1 + " minutes left";
             }
-        if (minutes === 1) {
+        if (minutes_remaining === 1) {
             if (seconds > 30) document.getElementById("demo").innerHTML = minutes + 1 + " minutes left";
             if (seconds < 31) document.getElementById("demo").innerHTML = minutes + " minute left ";
         }
-        if (minutes < 1) {
+        if (minutes_remaining < 1) {
             document.getElementById("demo").innerHTML = seconds + " seconds left";
         }
 
@@ -203,9 +213,9 @@ else {
 if (val > valMin) $in.val(val - 1);
 }
 });
-$("#stop").click(function() {
+$("#stop").click(function () {
 set_labels("stopped")
-if(state === "stopped") return;
+if (state === "stopped") return;
 stopclock = true;
 state = "stopped";
 substate = "notcycling";
@@ -214,17 +224,18 @@ document.getElementById("display").innerHTML = "Clock Stopped";
 document.getElementById("display2").innerHTML = "<br>";
 document.getElementById("demo").innerHTML = "<br>";
 $(".calc").css("background-color", "black");
-// $(".label").css("color", inactive_button_color);
 document.getElementById("session").innerHTML = "Start Session";
 document.getElementById("break").innerHTML = "Start Break";
-//    distance = -1;
-console.log("x: " + x + " state: " + state);
+document.getElementById("stop").innerText = " ";
+document.getElementById("pause").innerText = " ";
 clearInterval(x);
 });
-$("#session").click(function() {
-if((state === "paused")&&(substate === "break")) return;
+$("#session").click(function () {
+if ((state === "paused") && (substate === "break")) return;
 if (state === "session") return;
 set_labels("session")
+document.getElementById('stop').innerText="End Session";
+document.getElementById('pause').innerText="Pause"
 if (state === "stopped") {
 // https://www.w3docs.com/snippets/javascript/how-to-change-an-elements-class-with-javascript.html
 state = "break"; //for flip in nextstate
@@ -239,9 +250,9 @@ if (state === "break") {
 clearInterval(x);
 substate === "notcycling";
 stopclock = true;
-//        setTimeout(function() {
+document.getElementById('stop').innerText="End Session";
+document.getElementById('pause').innerText="Pause"
 nextstate();
-//        }, 12);
 return;
 }
 if (state === "paused") {
@@ -268,11 +279,11 @@ nextstate();
 }
 });
 
-$("#break").click(function() {
-console.log(state, " after #break key")
-if((state === "paused")&&(substate === "session")) return;
+$("#break").click(function () {
+if ((state === "paused") && (substate === "session")) return;
 if (state === "break") return;
 set_labels("break");
+document.getElementById('stop').innerText="End Session"
 if (state === "stopped") {
 state = "session"; //for flip in nextstate
 substate === "notcycling";
@@ -313,9 +324,12 @@ countdown(pauseddistance);
 }
 }
 }); // end #.break.click
-$("#pause").click(function() {
+
+$("#pause").click(function () {
 if ((state === "stopped") || (state === "paused")) return;
 if ((state === "session") || (state === "break")) {
+    document.getElementById('stop').innerText="End Session";
+    document.getElementById("pause").innerText=" ";
 pauseddistance = distance / (1000 * 60);
 substate = state;
 state = "paused";
@@ -338,4 +352,5 @@ clearInterval(x);
 return;
 }
 });
+
 /* global $*/

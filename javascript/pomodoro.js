@@ -1,5 +1,3 @@
-// change classes: https://stackoverflow.com/questions/195951/how-can-i-change-an-elements-class-with-javascript
-// Key command is document.getElementById('stop').innerText="End Session" 
 var calcwidth = 500;
 var state = "stopped";
 var substate = "notcycling"; //used to resume on pause
@@ -60,7 +58,7 @@ const active_color = "white";
 const inactive_color = "gray";
 
 function set_labels(state) {
-    console.log(state, "----\n")
+    // console.log(state, "----\n")
     for (const [key, value] of Object.entries(statesDICT[state])) {
         if (key != "id") {
             if (value === "active") document.getElementById(statesDICT[key]["id"]).className = document.getElementById(statesDICT[key]["id"]).className.replace(inactive_label, active_label);
@@ -68,9 +66,9 @@ function set_labels(state) {
             $(".blabel").css("color", inactive_color);
             $("#sessiontime").css("color", inactive_color);
             $("#breaktime").css("color", inactive_color);
-            // console.log("180", key, value, document.getElementById(statesDICT[key]["id"]));
         }
     }
+
     if(state === "stopped") {
         $(".blabel").css("color", active_color);
         $("#sessiontime").css("color", active_color);
@@ -191,11 +189,9 @@ function countdown() {
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
         var minutes_remaining = Math.trunc(distance/(1000*60))
-        // console.log(distance, minutes_remaining, Math.trunc(minutes_remaining), seconds)
 
         // Output the result in an element with id="demo" and in the tab
         seconds_formatted = ("0" + seconds)
-        // console.log(seconds, seconds_formatted.slice(-2));
         document.getElementById("tab").innerHTML = minutes_remaining + ":" + seconds_formatted.slice(-2);
         if (state !== "paused")
             if (minutes_remaining > 1) {
@@ -269,8 +265,7 @@ $("#stop").click(function () {
     $(".calc").css("background-color", "black");
     document.getElementById("session").innerHTML = "Start Session";
     document.getElementById("break").innerHTML = "Start Break";
-    document.getElementById("stop").innerText = " ";
-    document.getElementById("pause").innerText = " ";
+
     clearInterval(x);
 });
 
@@ -296,9 +291,7 @@ $("#session").click(function () {
         stopclock = true;
         document.getElementById('stop').innerText="End Session";
         document.getElementById('pause').innerText="Pause";
-        //        setTimeout(function() {
         nextstate();
-        //        }, 12);
         return;
     }
     if (state === "paused") {
@@ -326,7 +319,6 @@ $("#session").click(function () {
 });
 
 $("#break").click(function () {
-    console.log(state, " after #break key")
     if ((state === "paused") && (substate === "session")) return;
     if (state === "break") return;
     set_labels("break");
