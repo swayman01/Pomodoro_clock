@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <html>
+    <head>
+        <title id="tab">Title_Practice</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1  user-scalable=no">
+        <script src='./javascript/jquery-3.6.3.js'></script>
+        <link href='./stylesheets/pomodoro.css' rel='stylesheet'>
+        <!-- Thanks to SoundBible.com and www.freesoundslibrary.com for the bird calls -->
+        <audio id="owl" src="./media/great-horned-owl-call-trimmed.mp3" media-type="audio.mpeg"></audio>
+        <audio id="rooster" src="./media/Rudy_rooster_crowing-Shelley-1948282641.mp3" media-type="audio.mpeg" preload="auto"></audio>
+        <!-- horned_owl-Mike_Koenig-1945374932.mp3 no longer works
+        <audio id="owl" src="https://asset.cloudinary.com/swayman01/0ce0b7f90867759ea3447d328805aa0a" media-type="audio.mpeg"></audio> -->
+    </head>
+
+    <body id="body">
+        <div class="calc">
+            <!-- <div id="title_form"> -->
+                <form class="text-center=">
+                    <input id="title_1" type="text" value="Pomodoro Clock Title">
+                </form>
+            <!-- </div> -->
+            <div class="text-center">
+                <h1 id="title">Pomodoro Clock</h1>
+            </div>
+            <div id="settings">
+                <div class="label-row">
+                    <span> </span>
+                    <span id="session" class="text-center label label-active" type="button"> Start Session</span>
+                    <span> </span>
+                    <span id="break" class="text-center label label-active"> Start Break</span>
+                    <span> </span>
+                </div>
+                <br>
+                <div id="inputs" class="input-row">
+                    <span> </span>
+                    <button class="qty blabel" type="button" data-func="plus" data-field="field1">+</button>
+                    <input id="sessiontime" class="text-center" type="text" name="field1" value="60" />
+                    <button id="minus" class="qty blabel" type="button" data-func="minus" data-field="field1">-</button>
+                    <span> </span>
+                    <button class="qty blabel" type="button" data-func="plus" data-field="break">+</button>
+                    <input id="breaktime" class="text-center" type="text" name="break" value="15" />
+                    <button class="qty blabel" type="button" data-func="minus" data-field="break">-</button>
+                    <span> </span>
+                </div>
+                <br>
+                <div class="label-row">
+                    <span> </span>
+                    <button id="stop" class="label label-inactive text-center" type="button"> </button>
+                    <span> </span>
+                    <button id="pause" class="label label-inactive text-center" type="button"> </button>
+                    <span> </span>
+                </div>
+            </div>
+            <br>
+            <div id="dispwindow" class="text-center">
+                <h3 id="display"><br></h3>
+                <h2 id="display2"><br></h2>
+                <h2 id="demo"></h2>
+            </div>
+        </div>
+        
+        <footer class="text-center">
+            <hr>
+            <p>
+                <span>Written and coded by </span> 
+                <a href="https://www.freecodecamp.com/swayman01" target=”_blank”>Steve Wayman.</a></p>
+        </footer>
+        <script src='./javascript/title_practice.js'></script>
+        </body>
+    </html>
