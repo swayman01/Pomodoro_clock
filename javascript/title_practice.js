@@ -266,6 +266,8 @@ $("#stop").click(function () {
     $(".calc").css("background-color", "black");
     document.getElementById("session").innerHTML = "Start Session";
     document.getElementById("break").innerHTML = "Start Break";
+    document.getElementById("session").innerHTML = " ";
+    document.getElementById("break").innerHTML = " ";
 
     clearInterval(x);
 });
@@ -323,7 +325,9 @@ $("#break").click(function () {
     if ((state === "paused") && (substate === "session")) return;
     if (state === "break") return;
     set_labels("break");
-    document.getElementById('stop').innerText="End Session"
+    console.log("break");
+    document.getElementById('stop').innerText = "End Session";
+    document.getElementById('pause').innerText = "Pause";
     if (state === "stopped") {
         state = "session"; //for flip in nextstate
         substate === "notcycling";

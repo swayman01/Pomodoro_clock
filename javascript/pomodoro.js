@@ -322,7 +322,8 @@ $("#break").click(function () {
     if ((state === "paused") && (substate === "session")) return;
     if (state === "break") return;
     set_labels("break");
-    document.getElementById('stop').innerText="End Session"
+    document.getElementById('stop').innerText = "End Session";
+    document.getElementById('pause').innerText = "Pause";
     if (state === "stopped") {
         state = "session"; //for flip in nextstate
         substate === "notcycling";
