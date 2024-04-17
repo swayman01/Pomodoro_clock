@@ -265,7 +265,8 @@ $("#stop").click(function () {
     $(".calc").css("background-color", "black");
     document.getElementById("session").innerHTML = "Start Session";
     document.getElementById("break").innerHTML = "Start Break";
-
+    document.getElementById('stop').innerText = " ";
+    document.getElementById('pause').innerText = " ";
     clearInterval(x);
 });
 
@@ -323,6 +324,7 @@ $("#break").click(function () {
     if (state === "break") return;
     set_labels("break");
     document.getElementById('stop').innerText="End Session"
+    document.getElementById('pause').innerText="Pause"
     if (state === "stopped") {
         state = "session"; //for flip in nextstate
         substate === "notcycling";
