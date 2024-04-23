@@ -265,6 +265,8 @@ $("#stop").click(function () {
     $(".calc").css("background-color", "black");
     document.getElementById("session").innerHTML = "Start Session";
     document.getElementById("break").innerHTML = "Start Break";
+    document.getElementById("stop").innerHTML = " ";
+    document.getElementById("pause").innerHTML = " ";
 
     clearInterval(x);
 });
