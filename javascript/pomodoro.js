@@ -265,8 +265,14 @@ $("#stop").click(function () {
     $(".calc").css("background-color", "black");
     document.getElementById("session").innerHTML = "Start Session";
     document.getElementById("break").innerHTML = "Start Break";
+<<<<<<< HEAD
     document.getElementById('stop').innerText = " ";
     document.getElementById('pause').innerText = " ";
+=======
+    document.getElementById("stop").innerHTML = " ";
+    document.getElementById("pause").innerHTML = " ";
+
+>>>>>>> label_practice
     clearInterval(x);
 });
 
@@ -323,8 +329,13 @@ $("#break").click(function () {
     if ((state === "paused") && (substate === "session")) return;
     if (state === "break") return;
     set_labels("break");
+<<<<<<< HEAD
     document.getElementById('stop').innerText="End Session"
     document.getElementById('pause').innerText="Pause"
+=======
+    document.getElementById('stop').innerText = "End Session";
+    document.getElementById('pause').innerText = "Pause";
+>>>>>>> label_practice
     if (state === "stopped") {
         state = "session"; //for flip in nextstate
         substate === "notcycling";
