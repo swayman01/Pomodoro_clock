@@ -1,3 +1,13 @@
+/*
+White: Offers a high contrast against neon purple, making text easy to read.
+Yellow: A bright yellow can create a striking contrast and is visually appealing against purple.
+I prefer gold to yellow
+Lime Green: This vibrant color pairs well with purple and enhances visibility12.
+Gold: A metallic gold can add a luxurious touch while still being readable1.
+Black: While it may not be as vibrant, black can be effective if the neon purple is bright enough3.
+$active_button_color: white; 
+$inactive_button_color: gray;
+*/
 body {
   border-radius: 1.5625rem;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -14,54 +24,49 @@ h1,
 #title_1 {
   text-align: center;
   font-size: 2.25rem;
-  margin: 1.25rem 0 .625rem 0;
-   color: yellowgreen;
-  border-style: none;
+  margin: 1.25rem 0 0.625rem 0;
+  color: #fffdd0;
 }
 
 h2 {
   text-align: center;
   font-size: 1.5rem;
-  margin: 1.25rem 0 .625rem 0;
+  margin: 1.25rem 0 0.625rem 0;
 }
 
 h3 {
   text-align: center;
   font-size: 1.375rem;
-  margin: 1.25rem 0 .625rem 0;
+  margin: 1.25rem 0 0.625rem 0;
 }
 
 .label-row {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 20% 20% 20% 20% 20%;
-      grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-columns: 20% 20% 20% 20% 20%;
 }
 
 .input-row {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 14% 6% 20% 6% 8% 6% 20% 6% 14%;
-      grid-template-columns: 14% 6% 20% 6% 8% 6% 20% 6% 14%;
+  grid-template-columns: 14% 6% 20% 6% 8% 6% 20% 6% 14%;
   text-align: center;
 }
 
 .calc {
   border-style: outset;
   border-width: thin;
-  padding-top: .625rem;
-  padding-bottom: .500;
+  padding-top: 0.625rem;
+  padding-bottom: 0.5;
   background-color: black;
   max-width: 31.25rem;
   border-radius: 1.5625rem;
   word-wrap: break-word;
-  padding-right: .9375rem;
-  padding-left: .9375rem;
+  padding-right: 0.9375rem;
+  padding-left: 0.9375rem;
   margin-right: auto;
   margin-left: auto;
 }
 
-.label, .label-active, .label-inactive {
+.label, .label-inactive, .label-active {
   /* used for Start, Stop, and Pause */
   color: yellow;
   /* test to ensure no unintentional not used */
@@ -91,13 +96,6 @@ h3 {
   text-align: center;
 }
 
-/* #title_1 {
-  text-align: center;
-  font-size: 2.25rem;
-  margin: 1.25rem 0 .625rem 0;
-  color: yellowgreen; 
-} */
-
 #sessiontime,
 #breaktime {
   margin-bottom: 0;
@@ -111,13 +109,13 @@ h3 {
 
 #dispwindow {
   color: white;
-  padding-top: .625rem;
-  padding-bottom: .625rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
   background-color: inherit;
   margin: auto;
   text-align: center;
-  margin-bottom: .625rem;
-  margin-top: .625rem;
+  margin-bottom: 0.625rem;
+  margin-top: 0.625rem;
   width: 90%;
 }
 
@@ -131,5 +129,4 @@ h3 {
 
 #demo {
   color: white;
-}
-/*# sourceMappingURL=pomodoro.css.map */
+}/*# sourceMappingURL=pomodoro.css.map */

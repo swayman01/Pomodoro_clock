@@ -22,7 +22,6 @@ const active_color = "white";
 const inactive_color = "gray";
 
 function set_labels(state) {
-    // console.log(lstate,"----\n")
     for (const [key, value] of Object.entries(statesDICT[state])) {
         if (key != "id") {
             if (value === "active") document.getElementById(statesDICT[key]["id"]).className = document.getElementById(statesDICT[key]["id"]).className.replace(inactive_label, active_label);

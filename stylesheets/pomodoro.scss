@@ -1,23 +1,37 @@
+// Remember to turn on Live Sass from the lower status bar 
+
+/*
+White: Offers a high contrast against neon purple, making text easy to read.
+Yellow: A bright yellow can create a striking contrast and is visually appealing against purple.
+I prefer gold to yellow
+Lime Green: This vibrant color pairs well with purple and enhances visibility12.
+Gold: A metallic gold can add a luxurious touch while still being readable1.
+Black: While it may not be as vibrant, black can be effective if the neon purple is bright enough3.
 $active_button_color: white; 
+$inactive_button_color: gray;
+*/
+
+$active_button_color: white;
 $inactive_button_color: gray;
 
 body {
        border-radius: 1.5625rem;
        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-       color:white;
+       color: white;
 }
 
-footer{
+footer {
        border-radius: 1.5625rem;
        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-       color:black; 
+       color: black;
 }
 
-h1 {
+h1,
+#title_1 {
        text-align: center;
        font-size: 2.25rem;
        margin: 1.25rem 0 .625rem 0;
-       color: white;
+       color: #fffdd0
 }
 
 h2 {
@@ -56,11 +70,12 @@ h3 {
        padding-left: .9375rem;
        margin-right: auto;
        margin-left: auto;
- 
 }
 
-.label { /* used for Start, Stop, and Pause */
-       color: yellow; /* test to ensure no unintentional not used */
+.label {
+       /* used for Start, Stop, and Pause */
+       color: yellow;
+       /* test to ensure no unintentional not used */
        border-width: 0;
        background-color: inherit;
        font-size: 85%;
@@ -77,7 +92,8 @@ h3 {
        color: $inactive_button_color;
 }
 
-.blabel { /* used for plus and minus buttons */
+.blabel {
+       /* used for plus and minus buttons */
        text-align: center;
        margin-bottom: 0;
        border: 0;
@@ -89,7 +105,7 @@ h3 {
 }
 
 #sessiontime,
-#breaktime { 
+#breaktime {
        margin-bottom: 0;
        border: 0;
        background-color: inherit;

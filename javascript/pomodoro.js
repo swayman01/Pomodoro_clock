@@ -56,9 +56,9 @@ const active_label = "label-active";
 const inactive_label = "label-inactive";
 const active_color = "white";
 const inactive_color = "gray";
+// const paused_color = "purple"; //change later
 
 function set_labels(state) {
-    // console.log(state, "----\n")
     for (const [key, value] of Object.entries(statesDICT[state])) {
         if (key != "id") {
             if (value === "active") document.getElementById(statesDICT[key]["id"]).className = document.getElementById(statesDICT[key]["id"]).className.replace(inactive_label, active_label);
@@ -66,6 +66,8 @@ function set_labels(state) {
             $(".blabel").css("color", inactive_color);
             $("#sessiontime").css("color", inactive_color);
             $("#breaktime").css("color", inactive_color);
+            // x = document.getElementById('sessiontime');
+            // document.getElementById('sessiontime').setAttribute('style', 'color: gold');
         }
     }
 
@@ -140,6 +142,7 @@ function countdown() {
     $("#breaktime").css("color", inactive_color);
     // Update the count down every 1 second
     x = setInterval(function () {
+        // if (stopclock) return;
         now = new Date().getTime();
         distance = countDownDate - now;
         if ((distance / (60 * 1000) / val <= .1) || (distance <= (60 * 1000))) {
@@ -265,14 +268,8 @@ $("#stop").click(function () {
     $(".calc").css("background-color", "black");
     document.getElementById("session").innerHTML = "Start Session";
     document.getElementById("break").innerHTML = "Start Break";
-<<<<<<< HEAD
     document.getElementById('stop').innerText = " ";
     document.getElementById('pause').innerText = " ";
-=======
-    document.getElementById("stop").innerHTML = " ";
-    document.getElementById("pause").innerHTML = " ";
-
->>>>>>> label_practice
     clearInterval(x);
 });
 
@@ -329,13 +326,8 @@ $("#break").click(function () {
     if ((state === "paused") && (substate === "session")) return;
     if (state === "break") return;
     set_labels("break");
-<<<<<<< HEAD
     document.getElementById('stop').innerText="End Session"
-    document.getElementById('pause').innerText="Pause"
-=======
-    document.getElementById('stop').innerText = "End Session";
-    document.getElementById('pause').innerText = "Pause";
->>>>>>> label_practice
+    document.getElementById('pause').innerText = "Pause"
     if (state === "stopped") {
         state = "session"; //for flip in nextstate
         substate === "notcycling";
@@ -381,6 +373,8 @@ $("#pause").click(function () {
     console.log("376 pause")
     if ((state === "stopped") || (state === "paused")) return;
     if ((state === "session") || (state === "break")) {
+        $(".calc").css("background-color", "#c32aff");
+        // $("#break").css("color", "gold");
         document.getElementById('stop').innerText="End Session";
         document.getElementById("pause").innerText=" ";
         pauseddistance = distance / (1000 * 60);
