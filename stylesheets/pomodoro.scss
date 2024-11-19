@@ -13,6 +13,7 @@ $inactive_button_color: gray;
 
 $active_button_color: white;
 $inactive_button_color: gray;
+$title_color: #fffdd0;
 
 body {
        border-radius: 1.5625rem;
@@ -28,11 +29,13 @@ footer {
 
 h1,
 #title_1 {
+       border-style: none;
        text-align: center;
        font-size: 2.25rem;
        margin: 1.25rem 0 .625rem 0;
-       color: #fffdd0
+       color: #fffdd0;
 }
+// above bracket only indents with  border-style: none at the end
 
 h2 {
        text-align: center;
