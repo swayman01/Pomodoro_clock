@@ -349,9 +349,7 @@ $("#break").click(function () {
     if (state === "paused") {
         if (substate === "session") {
             document.getElementById("session").innerHTML = "Start Session";
-            //               stopclock = true;
-            console.log("x: " + x + " state: " + state);
-            //                clearInterval(x);
+            // console.log("x: " + x + " state: " + state);
             state = "session";
             substate = "notcycling";
             stopclock = false;
@@ -374,7 +372,6 @@ $("#pause").click(function () {
     if ((state === "stopped") || (state === "paused")) return;
     if ((state === "session") || (state === "break")) {
         $(".calc").css("background-color", "#c32aff");
-        // $("#break").css("color", "gold");
         document.getElementById('stop').innerText="End Session";
         document.getElementById("pause").innerText=" ";
         pauseddistance = distance / (1000 * 60);
