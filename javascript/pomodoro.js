@@ -45,8 +45,8 @@ const statesDICT = {
     "break_paused": {
         "session": "inactive",
         "break": "active",
-        "stopped": "active",
-        "paused": "inactive",
+        "stopped": "inactive",
+        "paused": "active",
         "id": "break"
     },
 };
@@ -84,7 +84,7 @@ if ($(window).width() < 500) calcwidth = $(window).width();
 $(".calc").css("max-width:", calcwidth);
 
 function nextstate() {
-    console.log("   nextstate - state: " + state);
+    console.log("   function nextstate  state: " + state);
     clicked = false;
     if (state === "break") {
         state = "session";
@@ -164,6 +164,7 @@ function countdown() {
             console.log("x: " + x + " state: " + state);
             clearInterval(x);
             if (state === "paused") {
+                console.log("state: ", state, "substate: ", substate);
                 document.getElementById("display").innerHTML = "Clock Paused";
                 document.getElementById("display2").innerHTML = "<br>";
                 distance = pauseddistance;
@@ -274,6 +275,7 @@ $("#stop").click(function () {
 });
 
 $("#session").click(function () {
+    console.log("state: ", state, "substate: ", substate);
     if ((state === "paused") && (substate === "break")) return;
     if (state === "session") return;
     set_labels("session")
@@ -299,6 +301,7 @@ $("#session").click(function () {
         return;
     }
     if (state === "paused") {
+        console.log("state: ", state, "substate: ", substate);
         if (substate === "session") {
             document.getElementById("session").innerHTML = "Start Session";
             document.getElementById("display").innerHTML = "DO NOT DISTURB";
@@ -323,6 +326,7 @@ $("#session").click(function () {
 });
 
 $("#break").click(function () {
+    console.log("state: ", state, "substate: ", substate);
     if ((state === "paused") && (substate === "session")) return;
     if (state === "break") return;
     set_labels("break");
@@ -347,6 +351,7 @@ $("#break").click(function () {
         return;
     }
     if (state === "paused") {
+        console.log("state: ", state, "substate: ", substate)
         if (substate === "session") {
             document.getElementById("session").innerHTML = "Start Session";
             // console.log("x: " + x + " state: " + state);
@@ -368,9 +373,10 @@ $("#break").click(function () {
 }); // end #.break.click
 
 $("#pause").click(function () {
-    console.log("376 pause")
-    if ((state === "stopped") || (state === "paused")) return;
-    if ((state === "session") || (state === "break")) {
+    console.log("371 pause,", "state: ", state, "substate: ", substate);
+    // if ((state === "stopped") || (state === "paused")) return;
+    if (state === "stopped") return;
+    if (state === "session") {
         $(".calc").css("background-color", "#c32aff");
         document.getElementById('stop').innerText="End Session";
         document.getElementById("pause").innerText=" ";
@@ -391,10 +397,35 @@ $("#pause").click(function () {
             Math.floor((pauseddistance - Math.floor(pauseddistance % (60))) * 60) + "s ";
         stopclock = true;
         distance = -1;
-        console.log("x: " + x + " state: " + state);
+        console.log("x: " + x + " state: " + state + " substate : " + substate);
         clearInterval(x);
         return;
     }
+    if (state === "break") {
+        $(".calc").css("background-color", "#c32aff");
+        document.getElementById('stop').innerText = " ";
+        document.getElementById("pause").innerText = "End Break ";
+        pauseddistance = distance / (1000 * 60);
+        substate = state;
+        state = "paused";
+        if (substate === "session") {
+            document.getElementById("session").innerHTML = "Resume Session";
+            set_labels("session_paused")
+        }
+        if (substate === "break") {
+            document.getElementById("break").innerHTML = "Resume Break";
+            set_labels("break_paused")
+        }
+        document.getElementById("display").innerHTML = "Clock Paused";
+        document.getElementById("display2").innerHTML = "<br>";
+        document.getElementById("demo").innerHTML = Math.floor(pauseddistance % (60)) + "m " +
+            Math.floor((pauseddistance - Math.floor(pauseddistance % (60))) * 60) + "s ";
+        stopclock = true;
+        distance = -1;
+        console.log("x: " + x + " state: " + state + " substate " + substate);
+        clearInterval(x);
+        return;
+    };
 });
 
 /* global $*/
