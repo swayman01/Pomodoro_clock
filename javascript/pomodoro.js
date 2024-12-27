@@ -57,6 +57,13 @@ const active_label = "label-active";
 const inactive_label = "label-inactive";
 const active_color = "white";
 const inactive_color = "gray";
+const session_paused_color = "#54A254"; // Used on line 157
+const session_color = "#145214";
+const break_color_old = "#90caf9";
+const break_paused_color = "#90caf9";
+const break_color_dark = "#70aad9";
+const break_color_light = "#b0faf9";
+const break_color = "#90caf9";
 // const paused_color = "purple"; //change later
 
 function set_labels(state) {
@@ -152,10 +159,10 @@ function countdown() {
     var now = new Date().getTime();
     distance = countDownDate - now;
     if ((state === "session") && ((distance / (60 * 1000) / val > .1) && (distance > (60 * 1000)))) {
-        $(".calc").css("background-color", "#145214");
+        $(".calc").css("background-color", session_paused_color);
     }
     if ((state === "break") && (distance > (30 * 1000))) {
-        $(".calc").css("background-color", "#90caf9");
+        $(".calc").css("background-color", break_color);
     }
     $(".blabel").css("color", inactive_color);
     $("#sessiontime").css("color", inactive_color);
