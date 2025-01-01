@@ -48,6 +48,8 @@ const statesDICT = {
         "break": "active",
         "stopped": "inactive",
         "paused": "active",
+        "stopped": "inactive",
+        "paused": "active",
         "id": "break"
     },
 };
@@ -60,10 +62,10 @@ const inactive_color = "gray";
 const session_paused_color = "#54A254"; // Used on line 157
 const session_color = "#145214";
 const break_color_old = "#90caf9";
-const break_paused_color = "#90caf9";
+const break_paused_color = "#ccccff";
 const break_color_dark = "#70aad9";
 const break_color_light = "#b0faf9";
-const break_color = "#90caf9";
+const break_color = "#710193";
 // const paused_color = "purple"; //change later
 
 function set_labels(state) {
@@ -79,7 +81,7 @@ function set_labels(state) {
         }
     }
 
-    if(state === "stopped") {
+    if (state === "stopped") {
         $(".blabel").css("color", active_color);
         $("#sessiontime").css("color", active_color);
         $("#breaktime").css("color", active_color);
@@ -159,9 +161,10 @@ function countdown() {
     var now = new Date().getTime();
     distance = countDownDate - now;
     if ((state === "session") && ((distance / (60 * 1000) / val > .1) && (distance > (60 * 1000)))) {
-        $(".calc").css("background-color", session_paused_color);
+        $(".calc").css("background-color", session_color);
     }
     if ((state === "break") && (distance > (30 * 1000))) {
+        $(".calc").css("background-color", break_color);
         $(".calc").css("background-color", break_color);
     }
     $(".blabel").css("color", inactive_color);
@@ -180,7 +183,6 @@ function countdown() {
         }
         if (distance <= (30 * 1000)) {
             if (state === "session") {
-                
                 $(".calc").css("background-color", "#FE5B35");
             }
             if (state === "break") {
@@ -219,7 +221,7 @@ function countdown() {
         // Time calculations for days, hours, minutes and seconds
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        var minutes_remaining = Math.trunc(distance/(1000*60))
+        var minutes_remaining = Math.trunc(distance / (1000 * 60))
 
         // Output the result in an element with id="demo" and in the tab
         seconds_formatted = ("0" + seconds)
@@ -294,8 +296,8 @@ $("#session").click(function () {
     if ((state === "paused") && (substate === "break")) return;
     if (state === "session") return;
     set_labels("session")
-    document.getElementById('stop').innerText="End Session";
-    document.getElementById('pause').innerText="Pause"
+    document.getElementById('stop').innerText = "End Session";
+    document.getElementById('pause').innerText = "Pause"
     if (state === "stopped") {
         // https://www.w3docs.com/snippets/javascript/how-to-change-an-elements-class-with-javascript.html
         state = "break"; //for flip in nextstate
@@ -310,8 +312,8 @@ $("#session").click(function () {
         clearInterval(x);
         cycling = false;
         stopclock = true;
-        document.getElementById('stop').innerText="End Session";
-        document.getElementById('pause').innerText="Pause";
+        document.getElementById('stop').innerText = "End Session";
+        document.getElementById('pause').innerText = "Pause";
         nextstate();
         return;
     }
@@ -322,7 +324,7 @@ $("#session").click(function () {
             document.getElementById("display").innerHTML = "DO NOT DISTURB";
             document.getElementById("display2").innerHTML = "Focused Work In Progress";
             state = "session";
-            cycling = true; 
+            cycling = true;
             stopclock = false;
             countdown(pauseddistance);
         }
@@ -345,7 +347,7 @@ $("#break").click(function () {
     if ((state === "paused") && (substate === "session")) return;
     if (state === "break") return;
     set_labels("break");
-    document.getElementById('stop').innerText="End Session"
+    document.getElementById('stop').innerText = "End Session"
     document.getElementById('pause').innerText = "Pause"
     if (state === "stopped") {
         state = "session"; //for flip in nextstate
@@ -395,9 +397,9 @@ $("#pause").click(function () {
     }
     if (state === "stopped") return;
     if (state === "session") {
-        $(".calc").css("background-color", "#c32aff");
-        document.getElementById('stop').innerText="End Session";
-        document.getElementById("pause").innerText=" ";
+        $(".calc").css("background-color", session_paused_color);
+        document.getElementById('stop').innerText = "End Session";
+        document.getElementById("pause").innerText = " ";
         pauseddistance = distance / (1000 * 60);
         substate = state;
         state = "paused";
@@ -416,11 +418,12 @@ $("#pause").click(function () {
         stopclock = true;
         distance = -1;
         console.log("x: " + x + " state: " + state + " substate : " + substate);
+        console.log("x: " + x + " state: " + state + " substate : " + substate);
         clearInterval(x);
         return;
     }
     if (state === "break") {
-        $(".calc").css("background-color", "#c32aff");
+        $(".calc").css("background-color", break_paused_color);
         document.getElementById('stop').innerText = " ";
         document.getElementById("pause").innerText = "End Break ";
         pauseddistance = distance / (1000 * 60);
