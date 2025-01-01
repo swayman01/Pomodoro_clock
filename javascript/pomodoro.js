@@ -57,14 +57,13 @@ const active_label = "label-active";
 const inactive_label = "label-inactive";
 const active_color = "white";
 const inactive_color = "gray";
-const session_paused_color = "#54A254"; // Used on line 157
+const session_paused_color = "#54A254";
 const session_color = "#145214";
-const break_color_old = "#90caf9";
+// const break_color_old = "#90caf9";
 const break_paused_color = "#ccccff";
-const break_color_dark = "#70aad9";
-const break_color_light = "#b0faf9";
+// const break_color_dark = "#70aad9";
+// const break_color_light = "#b0faf9";
 const break_color = "#710193";
-// const paused_color = "purple"; //change later
 
 function set_labels(state) {
     for (const [key, value] of Object.entries(statesDICT[state])) {
@@ -74,8 +73,6 @@ function set_labels(state) {
             $(".blabel").css("color", inactive_color);
             $("#sessiontime").css("color", inactive_color);
             $("#breaktime").css("color", inactive_color);
-            // x = document.getElementById('sessiontime');
-            // document.getElementById('sessiontime').setAttribute('style', 'color: gold');
         }
     }
 
@@ -169,7 +166,6 @@ function countdown() {
     $("#breaktime").css("color", inactive_color);
     // Update the count down every 1 second
     x = setInterval(function () {
-        // if (stopclock) return;
         now = new Date().getTime();
         distance = countDownDate - now;
         if ((distance / (60 * 1000) / val <= .1) || (distance <= (60 * 1000))) {
@@ -246,7 +242,6 @@ function countdown() {
                 document.getElementById("session").innerHTML = "Start Session";
                 document.getElementById("break").innerHTML = "Start Break";
             }
-            //           distance = -1;
             console.log("x: " + x + " state: " + state);
             clearInterval(x);
         }
@@ -289,7 +284,7 @@ $("#stop").click(function () {
 });
 
 $("#session").click(function () {
-    console.log("state: ", state, "substate: ", substate);
+    console.log("#session: state: ", state, "substate: ", substate);
     if ((state === "paused") && (substate === "break")) return;
     if (state === "session") return;
     set_labels("session")
@@ -300,9 +295,7 @@ $("#session").click(function () {
         state = "break"; //for flip in nextstate
         cycling = false;
         stopclock = false;
-        //        setTimeout(function() {
         nextstate();
-        //        }, 12);
         return;
     }
     if (state === "break") {
@@ -328,13 +321,10 @@ $("#session").click(function () {
         if (substate === "break") {
             document.getElementById("break").innerHTML = "Start Break";
             console.log("x: " + x + " state: " + state);
-            //            clearInterval(x);
-            //                setTimeout(function() {
             state = "break";
             cycling = false;
             stopclock = false;
             nextstate();
-            //                }, 12);
         }
     }
 });
@@ -350,25 +340,20 @@ $("#break").click(function () {
         state = "session"; //for flip in nextstate
         cycling = false;
         stopclock = false;
-        //        setTimeout(function() {
         nextstate();
-        //        }, 12);
         return;
     }
     if (state === "session") {
         clearInterval(x);
         cycling = false;
         stopclock = true;
-        //        setTimeout(function() {
         nextstate();
-        //        }, 12);
         return;
     }
     if (state === "paused") {
         console.log("state: ", state, "substate: ", substate)
         if (substate === "session") {
             document.getElementById("session").innerHTML = "Start Session";
-            // console.log("x: " + x + " state: " + state);
             state = "session";
             cycling = false;
             stopclock = false;
@@ -388,7 +373,6 @@ $("#break").click(function () {
 
 $("#pause").click(function () {
     console.log("#pause,", "state: ", state, "substate: ", substate);
-    // if ((state === "stopped") || (state === "paused")) return;
     if ((state === "paused") && (substate === "break")) {
         stop_clock();
     }
@@ -414,7 +398,6 @@ $("#pause").click(function () {
             Math.floor((pauseddistance - Math.floor(pauseddistance % (60))) * 60) + "s ";
         stopclock = true;
         distance = -1;
-        console.log("x: " + x + " state: " + state + " substate : " + substate);
         clearInterval(x);
         return;
     }
@@ -425,7 +408,6 @@ $("#pause").click(function () {
         pauseddistance = distance / (1000 * 60);
         substate = state;
         state = "paused";
-        // cycling = false;
         if (substate === "session") {
             document.getElementById("session").innerHTML = "Resume Session";
             set_labels("session_paused")
@@ -440,7 +422,6 @@ $("#pause").click(function () {
             Math.floor((pauseddistance - Math.floor(pauseddistance % (60))) * 60) + "s ";
         stopclock = true;
         distance = -1;
-        console.log("x: " + x + " state: " + state + " substate " + substate);
         clearInterval(x);
         return;
     };
